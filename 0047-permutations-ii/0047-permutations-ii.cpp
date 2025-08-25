@@ -2,34 +2,28 @@ class Solution {
 public:
     vector<vector<int>> result;
 
-    void backtrack(vector<int>& nums, vector<int>& curr, vector<bool>& used) {
-        if(curr.size() == nums.size()) {
-            result.push_back(curr);
+    void backtrack(vector<int>& nums, int start) {
+        if(start == nums.size()) {
+            result.push_back(nums);
             return;
         }
-        for(int i = 0; i < nums.size(); i++) {
-            // Skip if already used
-            if(used[i]) continue;
 
-            // Skip duplicates: if nums[i] == nums[i-1] and nums[i-1] not used yet
-            if(i > 0 && nums[i] == nums[i-1] && !used[i-1]) continue;
+        unordered_set<int> seen; // to avoid duplicates at this recursion level
 
-            curr.push_back(nums[i]);
-            used[i] = true;
+        for(int i = start; i < nums.size(); i++) {
+            if(seen.count(nums[i])) continue; // skip duplicate numbers
+            seen.insert(nums[i]);
 
-            backtrack(nums, curr, used);
-
-            // Backtrack
-            curr.pop_back();
-            used[i] = false;
+            swap(nums[start], nums[i]);  // choose nums[i] for position "start"
+            backtrack(nums, start + 1);  // recurse
+            swap(nums[start], nums[i]);  // undo (backtrack)
         }
     }
 
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        sort(nums.begin(), nums.end()); // Sort for duplicate check
-        vector<bool> used(nums.size(), false);
-        vector<int> curr;
-        backtrack(nums, curr, used);
+        sort(nums.begin(), nums.end()); // sorting helps with duplicates
+        backtrack(nums, 0);
         return result;
     }
 };
+
