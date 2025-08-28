@@ -2,23 +2,20 @@ class Solution {
 public:
     string largestNumber(vector<int>& nums) {
         vector<string> strNums;
-        for (int num : nums) {
-            strNums.push_back(to_string(num));
+        for(int n : nums){
+            strNums.push_back(to_string(n));
         }
 
-        // Step 2: sort using custom comparator
-        sort(strNums.begin(), strNums.end(), [](string &a, string &b) {
-            return a + b > b + a;  // "9" + "34" = "934" > "349" = "34" + "9"
+        sort(strNums.begin(), strNums.end(), [](string &a, string &b){
+            return a + b > b + a;
         });
 
-        if (strNums[0] == "0") return "0";
+        if(strNums[0] == "0") return "0";
 
-        // Step 4: concatenate result
         string result;
-        for (string &s : strNums) {
+        for(string &s : strNums){
             result += s;
         }
-
         return result;
     }
 };
