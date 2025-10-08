@@ -6,12 +6,8 @@ public:
 
         for(int i=0; i<len; i++){
             if(isalnum(s[i])){
-                result += s[i];
+                result += tolower(s[i]);
             }
-        }
-
-        for(int i=0; i<result.size(); i++){
-            result[i] = tolower(result[i]);
         }
 
         for(int i=0; i<result.size() / 2; i++){
