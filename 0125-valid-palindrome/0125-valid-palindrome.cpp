@@ -9,9 +9,9 @@ public:
                 result += tolower(s[i]);
             }
         }
-
-        for(int i=0; i<result.size() / 2; i++){
-            if(result[i] != result[result.size()-1-i]){
+        int n = result.size();
+        for(int i=0; i<n / 2; i++){
+            if(result[i] != result[n-1-i]){
                 return false;
                 break;
             }
