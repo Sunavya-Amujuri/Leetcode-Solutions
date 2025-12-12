@@ -11,11 +11,11 @@ class Solution {
             int sum = carry;
 
             if(i>=0){
-                sum = sum + a.charAt(i) - '0';
+                sum += a.charAt(i) - '0';
                 i--;
             }
             if(j>=0){
-                sum = sum + b.charAt(j) - '0';
+                sum += b.charAt(j) - '0';
                 j--;
             }
             sb.append(sum%2);
